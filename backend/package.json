@@ -1,0 +1,20 @@
+{
+  "type": "module",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "powershell -Command \"New-Item -ItemType Directory -Force -Path public; Copy-Item -Path ../frontend/* -Destination public/ -Recurse -Force; node app.js\""
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.6.1",
+    "json": "^11.0.0",
+    "jsonwebtoken": "^9.0.3",
+    "middleware": "^1.0.0",
+    "mongoose": "^9.7.4",
+    "nanoid": "^5.1.16"
+  }
+}
