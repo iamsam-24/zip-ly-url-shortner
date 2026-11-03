@@ -1,6 +1,6 @@
 # Deploy Ziply
 
-This setup deploys the Node/Express API to Render and the static frontend to Vercel. Vercel proxies API and short-link requests to Render, so the frontend can keep using its existing relative API URLs and browser login cookies.
+This setup deploys the Node/Express API to Render and the static frontend to Netlify or Vercel. The frontend hosting provider proxies API and short-link requests to Render, so the frontend can keep using its existing relative API URLs and browser login cookies.
 
 ## 1. Prepare MongoDB
 
@@ -28,23 +28,32 @@ Use a MongoDB Atlas database (or another reachable MongoDB instance) and copy it
 
 Save changes and let Render redeploy. Do not add a variable named `sync`.
 
-Do not commit these secret values or put them in Vercel.
+Do not commit these secret values or put them in Netlify or Vercel.
 
-## 3. Deploy the frontend to Vercel
+## 3. Deploy the frontend to Netlify
+
+The Netlify site needs the [`frontend/_redirects`](./frontend/_redirects) file in its published directory. Without these proxy rules, `/api/...` requests return Netlify's 404 page and the frontend reports that the service is unreachable.
+
+1. In Netlify, open the existing `zip-ly` site and confirm it is connected to this repository.
+2. Set the **Publish directory** to `frontend` (with no build command required for the static HTML/CSS/JavaScript site).
+3. Ensure the latest commit containing `frontend/_redirects` is deployed. If the site is deployed manually, redeploy the contents of `frontend` so the `_redirects` file lands at the published root.
+4. Once deployed, open `https://zip-ly.netlify.app/api/auth/me`. A `401 Unauthorized` JSON/API response is expected when logged out; a Netlify HTML `404 Page not found` means the redirect rules were not included in the deployed publish directory.
+
+## 4. Deploy the frontend to Vercel (alternative)
 
 1. In Vercel, import the same GitHub repository.
 2. Set **Root Directory** to `frontend`; use the **Other** framework preset. No build command or output directory is required—the frontend is static HTML, CSS, and JavaScript.
 3. Deploy. The [`frontend/vercel.json`](./frontend/vercel.json) rewrites `/api/...` and short links (`/<id>`) to `https://ziply-wav0.onrender.com`.
 
-## 4. Set the public short-link domain
+## 5. Set the public short-link domain
 
-After Vercel is live, set the Render `APP_URL` environment variable to the Vercel deployment's public URL, with a trailing slash (for example, `https://your-project.vercel.app/`). Save the change and let Render redeploy.
+After Netlify or Vercel is live, set the Render `APP_URL` environment variable to the frontend's public URL, with a trailing slash (for example, `https://zip-ly.netlify.app/`). Save the change and let Render redeploy.
 
-New shortened URLs will then use the Vercel domain; Vercel forwards visits to those links to Render for redirection. Existing URLs already stored in the database are not modified.
+New shortened URLs will then use the frontend's domain; Netlify or Vercel forwards visits to those links to Render for redirection. Existing URLs already stored in the database are not modified.
 
-## 5. Smoke-test
+## 6. Smoke-test
 
-- Open the Vercel URL and shorten a valid destination URL.
+- Open the Netlify or Vercel URL and shorten a valid destination URL.
 - Open the returned link in a private/incognito window and confirm it redirects.
 - Register or log in, reload, and confirm the session remains active.
 - Confirm the Render logs show a successful MongoDB connection.
