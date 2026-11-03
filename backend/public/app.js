@@ -225,10 +225,14 @@
     // ======================== HEADER ========================
     function initHeader() {
         const header = document.getElementById('site-header');
+        const logo = header.querySelector('.brand-logo');
         ScrollTrigger.create({
             start: 100,
             onUpdate: (self) => {
-                header.classList.toggle('scrolled', self.scroll() > 100);
+                const isScrolled = self.scroll() > 100;
+                const logoSrc = isScrolled ? 'ziply-logo.png' : 'ziply-logo-light.png';
+                header.classList.toggle('scrolled', isScrolled);
+                if (logo.getAttribute('src') !== logoSrc) logo.setAttribute('src', logoSrc);
             }
         });
     }
