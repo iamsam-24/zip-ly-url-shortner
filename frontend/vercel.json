@@ -2,11 +2,11 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://ziply-backend.onrender.com/api/:path*"
+      "destination": "https://ziply-wav0.onrender.com/api/:path*"
     },
     {
       "source": "/:id",
-      "destination": "https://ziply-backend.onrender.com/:id"
+      "destination": "https://ziply-wav0.onrender.com/:id"
     }
   ]
 }

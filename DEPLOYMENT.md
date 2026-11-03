@@ -10,12 +10,23 @@ Use a MongoDB Atlas database (or another reachable MongoDB instance) and copy it
 
 1. Push this repository to GitHub.
 2. In Render, choose **New → Blueprint**, select the repository, and let Render read [`render.yaml`](./render.yaml).
-3. Keep the service name `ziply-backend` so it uses `https://ziply-backend.onrender.com`. If Render assigns a different service URL, use that actual URL in the Vercel and `APP_URL` settings below.
+3. Use the Render service URL `https://ziply-wav0.onrender.com` for the Vercel and `APP_URL` settings below.
 4. Enter the requested values:
    - `MONGO_URI`: your MongoDB connection URI.
    - `JWT_SECRET`: a newly generated, long random secret. For example, run `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"` locally and paste its output into Render.
    - `APP_URL`: use the Render service URL temporarily, including the trailing slash, so initial backend-created links have a valid base. Update it after Vercel is deployed.
 5. Deploy the service and wait until it is live. The Render root (`/`) serves the existing public page and is also used as the health check.
+
+`sync: false` in [`render.yaml`](./render.yaml) is a Blueprint YAML instruction, not a setting in Render's Environment dashboard. If you created the web service manually instead of using **New → Blueprint**, open the service's **Environment** tab and add these entries using **Add Environment Variable** (Name and Value):
+
+| Name | Value |
+|---|---|
+| `NODE_ENV` | `production` |
+| `MONGO_URI` | Your MongoDB connection URI |
+| `JWT_SECRET` | A long random secret generated locally |
+| `APP_URL` | `https://ziply-wav0.onrender.com/` initially |
+
+Save changes and let Render redeploy. Do not add a variable named `sync`.
 
 Do not commit these secret values or put them in Vercel.
 
@@ -23,8 +34,7 @@ Do not commit these secret values or put them in Vercel.
 
 1. In Vercel, import the same GitHub repository.
 2. Set **Root Directory** to `frontend`; use the **Other** framework preset. No build command or output directory is required—the frontend is static HTML, CSS, and JavaScript.
-3. Deploy. The [`frontend/vercel.json`](./frontend/vercel.json) rewrites `/api/...` and short links (`/<id>`) to the Render backend. It is preconfigured for `https://ziply-backend.onrender.com`.
-4. If the Render URL differs, update both rewrite destinations in `frontend/vercel.json` to the actual Render URL and redeploy Vercel.
+3. Deploy. The [`frontend/vercel.json`](./frontend/vercel.json) rewrites `/api/...` and short links (`/<id>`) to `https://ziply-wav0.onrender.com`.
 
 ## 4. Set the public short-link domain
 
