@@ -1,5 +1,5 @@
 /* ==========================================================================
-   SHRNK — App Controller (Trionn-style animations + API integration)
+   Ziply — App Controller (Trionn-style animations + API integration)
    ========================================================================== */
 (function () {
     'use strict';
@@ -37,11 +37,8 @@
             }
         });
 
-        // Phase 1: Logo + corners + border draw
-        tl.to('.pl-logo-text', { opacity: 1, duration: .6, ease: 'power2.out' })
-          .to('.pl-corner', { opacity: 1, duration: .3, stagger: .05 }, '-=.3')
-          .to('.pl-border-svg rect', { strokeDashoffset: 0, duration: 1.2, ease: 'power2.inOut' }, '-=.4')
-
+        // Phase 1: Logo reveal
+        tl.to('.pl-logo-box .brand-logo', { opacity: 1, duration: .6, ease: 'power2.out' })
         // Phase 2: Tagline words
           .to('.pl-tagline', { opacity: 1, duration: .4 }, '-=.6')
           .from('.pl-tag-word', { y: 15, opacity: 0, duration: .4, stagger: .12, ease: 'power3.out' }, '-=.3')
@@ -135,13 +132,15 @@
         gsap.registerPlugin(ScrollTrigger);
 
         // Hero char reveals
-        gsap.to('.char', {
-            y: 0,
-            duration: 1,
-            stagger: .04,
-            ease: 'power4.out',
-            delay: .1
-        });
+        if (document.querySelector('.char')) {
+            gsap.to('.char', {
+                y: 0,
+                duration: 1,
+                stagger: .04,
+                ease: 'power4.out',
+                delay: .1
+            });
+        }
 
         // Hero subtitle
         gsap.to('.hero-sub', { opacity: 1, y: 0, duration: .8, ease: 'power3.out', delay: .8 });

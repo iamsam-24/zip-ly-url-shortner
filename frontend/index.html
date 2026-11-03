@@ -3,11 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SHRNK — Premium URL Shortener</title>
-    <meta name="description" content="Lightning-fast, beautifully crafted URL shortener with analytics, custom aliases, and a premium experience.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Ziply — Shorten links. Share with confidence.</title>
+    <meta name="description" content="Create clean, memorable short links with Ziply. Shorten URLs, customize links, and track clicks from one simple dashboard.">
+    <link rel="icon" type="image/png" href="ziply-logo.png">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -22,14 +20,7 @@
     </div>
     <div class="pl-center">
         <div class="pl-logo-box">
-            <div class="pl-logo-text">SHRNK<span class="pl-dot">.</span></div>
-            <svg class="pl-border-svg" viewBox="0 0 200 80">
-                <rect x="1" y="1" width="198" height="78" rx="12" fill="none" stroke="#333" stroke-width="1" stroke-dasharray="1" stroke-dashoffset="1" pathLength="1"/>
-            </svg>
-            <div class="pl-corner tl">+</div>
-            <div class="pl-corner tr">+</div>
-            <div class="pl-corner bl">+</div>
-            <div class="pl-corner br">+</div>
+            <img class="brand-logo" src="ziply-logo-light.png" alt="Ziply">
         </div>
         <div class="pl-tagline">
             <span class="pl-tag-word">Shorten</span>
@@ -57,7 +48,7 @@
 <!-- ======================== HEADER ======================== -->
 <header id="site-header" class="site-header">
     <a href="#hero" class="header-logo magnetic" data-nav>
-        <span class="logo-mark">SHRNK<span class="dot">.</span></span>
+        <img class="brand-logo" src="ziply-logo-light.png" alt="Ziply">
     </a>
     <nav class="header-nav">
         <a href="#hero" class="nav-char-link magnetic" data-nav>
@@ -87,15 +78,12 @@
     <section id="hero" class="section section-hero">
         <div class="hero-inner">
             <div class="hero-text-block">
+                <span class="hero-eyebrow">LINKS THAT TAKE YOU FURTHER</span>
                 <h1 class="hero-title">
-                    <span class="title-line" data-reveal>
-                        <span class="char-wrap"><span class="char">S</span></span><span class="char-wrap"><span class="char">H</span></span><span class="char-wrap"><span class="char">R</span></span><span class="char-wrap"><span class="char">N</span></span><span class="char-wrap"><span class="char">K</span></span><span class="char-wrap"><span class="char dot-char">.</span></span>
-                    </span>
-                    <span class="title-line title-outlined" data-reveal>
-                        <span class="char-wrap"><span class="char">T</span></span><span class="char-wrap"><span class="char">H</span></span><span class="char-wrap"><span class="char">E</span></span><span class="char-wrap"><span class="char">&nbsp;</span></span><span class="char-wrap"><span class="char">W</span></span><span class="char-wrap"><span class="char">E</span></span><span class="char-wrap"><span class="char">B</span></span><span class="char-wrap"><span class="char dot-char">.</span></span>
-                    </span>
+                    <span>Shorten your links.</span>
+                    <span class="hero-title-accent">Make them count.</span>
                 </h1>
-                <p class="hero-sub" data-reveal-line>Elevate your links with lightning-fast redirection, real-time analytics, and cyber-minimal design.</p>
+                <p class="hero-sub" data-reveal-line>Make every link easier to share, remember, and track.</p>
             </div>
 
             <!-- URL SHORTENER STATION -->
@@ -103,26 +91,26 @@
                 <form id="shorten-form" class="shorten-form">
                     <div class="input-row">
                         <div class="input-field">
-                            <label for="long-url">PASTE YOUR LINK</label>
-                            <input type="url" id="long-url" required placeholder="https://example.com/your-long-url" autocomplete="off">
+                            <label for="long-url">YOUR DESTINATION URL</label>
+                            <input type="url" id="long-url" required placeholder="https://example.com/your-long-link" autocomplete="url">
                             <div class="input-line"></div>
                         </div>
                     </div>
                     <div class="advanced-row">
                         <button type="button" id="toggle-advanced" class="btn-text-toggle magnetic">
-                            <span>CUSTOM ALIAS</span>
+                            <span>PERSONALIZE YOUR LINK</span>
                             <svg class="chevron" viewBox="0 0 24 24" width="14" height="14"><path d="M7 10l5 5 5-5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
                         </button>
                     </div>
                     <div id="advanced-panel" class="advanced-panel">
                         <div class="input-field">
-                            <label for="custom-slug">CUSTOM SLUG</label>
-                            <input type="text" id="custom-slug" placeholder="e.g. my-brand" autocomplete="off">
+                            <label for="custom-slug">CUSTOM LINK ENDING</label>
+                            <input type="text" id="custom-slug" placeholder="e.g. summer-launch" autocomplete="off">
                             <div class="input-line"></div>
                         </div>
                     </div>
                     <button type="submit" class="btn-primary magnetic">
-                        <span>SHRINK IT</span>
+                        <span>SHORTEN URL</span>
                         <svg viewBox="0 0 24 24" width="18" height="18"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
                     </button>
                 </form>
@@ -325,11 +313,11 @@
     </div>
     <div class="footer-inner">
         <div class="footer-left">
-            <span class="footer-logo">SHRNK<span class="dot">.</span></span>
+            <img class="brand-logo footer-logo" src="ziply-logo.png" alt="Ziply">
             <p class="footer-tagline">Crafted with meaningful motion.</p>
         </div>
         <div class="footer-right">
-            <span class="footer-copy">© 2026 SHRNK. All rights reserved.</span>
+            <span class="footer-copy">© 2026 Ziply. All rights reserved.</span>
         </div>
     </div>
 </footer>
