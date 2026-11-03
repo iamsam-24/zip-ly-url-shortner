@@ -1,8 +1,19 @@
 import { getShortUrl } from "../dao/short_url.dao.js"
 import { createShortUrlWithoutUser, createShortUrlWithUser } from "../services/short_url.service.js"
 import wrapAsync from "../utils/tryCatchWrapper.js"
+import { AppError } from "../utils/errorHandler.js"
+
+const getAppUrl = () => {
+    const appUrl = process.env.APP_URL?.trim()
+    if (!appUrl) {
+        throw new AppError("Short link domain is not configured. Set APP_URL on the server.", 500)
+    }
+
+    return `${appUrl.replace(/\/+$/, "")}/`
+}
 
 export const createShortUrl = wrapAsync(async (req,res)=>{
+    const appUrl = getAppUrl()
     const data = req.body
     let shortUrl
     if(req.user){
@@ -10,7 +21,7 @@ export const createShortUrl = wrapAsync(async (req,res)=>{
     }else{  
         shortUrl = await createShortUrlWithoutUser(data.url,data.slug)
     }
-    res.status(200).json({shortUrl : process.env.APP_URL + shortUrl})
+    res.status(200).json({shortUrl : appUrl + shortUrl})
 })
 
 
@@ -22,7 +33,8 @@ export const redirectFromShortUrl = wrapAsync(async (req,res)=>{
 })
 
 export const createCustomShortUrl = wrapAsync(async (req,res)=>{
+    const appUrl = getAppUrl()
     const {url,slug} = req.body
     const shortUrl = await createShortUrlWithoutUser(url,slug)
-    res.status(200).json({shortUrl : process.env.APP_URL + shortUrl})
+    res.status(200).json({shortUrl : appUrl + shortUrl})
 })

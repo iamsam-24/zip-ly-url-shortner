@@ -14,7 +14,7 @@ Use a MongoDB Atlas database (or another reachable MongoDB instance) and copy it
 4. Enter the requested values:
    - `MONGO_URI`: your MongoDB connection URI.
    - `JWT_SECRET`: a newly generated, long random secret. For example, run `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"` locally and paste its output into Render.
-   - `APP_URL`: use the Render service URL temporarily, including the trailing slash, so initial backend-created links have a valid base. Update it after Vercel is deployed.
+   - `APP_URL`: set it to the frontend's public URL, including the trailing slash. For the current Netlify site, use `https://zip-ly.netlify.app/`.
 5. Deploy the service and wait until it is live. The Render root (`/`) serves the existing public page and is also used as the health check.
 
 `sync: false` in [`render.yaml`](./render.yaml) is a Blueprint YAML instruction, not a setting in Render's Environment dashboard. If you created the web service manually instead of using **New → Blueprint**, open the service's **Environment** tab and add these entries using **Add Environment Variable** (Name and Value):
@@ -24,7 +24,7 @@ Use a MongoDB Atlas database (or another reachable MongoDB instance) and copy it
 | `NODE_ENV` | `production` |
 | `MONGO_URI` | Your MongoDB connection URI |
 | `JWT_SECRET` | A long random secret generated locally |
-| `APP_URL` | `https://ziply-wav0.onrender.com/` initially |
+| `APP_URL` | `https://zip-ly.netlify.app/` |
 
 Save changes and let Render redeploy. Do not add a variable named `sync`.
 
@@ -47,7 +47,7 @@ The Netlify site needs the [`frontend/_redirects`](./frontend/_redirects) file i
 
 ## 5. Set the public short-link domain
 
-After Netlify or Vercel is live, set the Render `APP_URL` environment variable to the frontend's public URL, with a trailing slash (for example, `https://zip-ly.netlify.app/`). Save the change and let Render redeploy.
+Set the Render `APP_URL` environment variable to the frontend's public URL, with a trailing slash (for this site, `https://zip-ly.netlify.app/`). Save the change and let Render redeploy.
 
 New shortened URLs will then use the frontend's domain; Netlify or Vercel forwards visits to those links to Render for redirection. Existing URLs already stored in the database are not modified.
 
